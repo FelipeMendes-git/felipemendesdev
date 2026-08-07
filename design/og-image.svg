@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="marca" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5C8AFF" />
+      <stop offset="1" stop-color="#2450D8" />
+    </linearGradient>
+
+    <radialGradient id="halo" cx="0.5" cy="0" r="0.75">
+      <stop offset="0" stop-color="#4A7CFF" stop-opacity="0.30" />
+      <stop offset="1" stop-color="#4A7CFF" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="haloBaixo" cx="0.15" cy="1" r="0.6">
+      <stop offset="0" stop-color="#1B2E6B" stop-opacity="0.55" />
+      <stop offset="1" stop-color="#1B2E6B" stop-opacity="0" />
+    </radialGradient>
+
+    <pattern id="malha" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <!-- Fundo -->
+  <rect width="1200" height="630" fill="#070A12" />
+  <rect width="1200" height="630" fill="url(#malha)" />
+  <rect width="1200" height="630" fill="url(#haloBaixo)" />
+  <rect width="1200" height="630" fill="url(#halo)" />
+
+  <!-- Sobrancelha -->
+  <text x="600" y="150" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+        font-size="21" font-weight="600" letter-spacing="5.6" fill="#7FA3FF">LANDING PAGES DE ALTO PADRÃO</text>
+
+  <!-- Manchete -->
+  <text x="600" y="272" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+        font-size="76" font-weight="600" letter-spacing="-2.6" fill="#E9EDF5">Uma página. Um objetivo:</text>
+  <text x="600" y="376" text-anchor="middle" font-family="Georgia, Times New Roman, serif"
+        font-size="86" font-style="italic" letter-spacing="-1.6" fill="#7FA3FF">converter.</text>
+
+  <!-- Apoio -->
+  <text x="600" y="446" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif"
+        font-size="25" fill="#8D97AD">Páginas sob medida para quem não pode perder um visitante.</text>
+
+  <!-- Régua -->
+  <rect x="100" y="512" width="1000" height="1" fill="#FFFFFF" fill-opacity="0.09" />
+
+  <!-- Rodapé: monograma + nome -->
+  <g transform="translate(100 542)">
+    <rect width="52" height="52" rx="13" fill="url(#marca)" />
+    <g fill="#FFFFFF" transform="translate(26 26) scale(0.8125) translate(-32 -32)">
+      <path d="M14 17h16v6.4H20.6v5.1h8.2v6.4h-8.2V47H14z" />
+      <path d="M33.5 17h5.9l4.8 9.6 4.8-9.6h5.9v30h-6.4V30.2l-4.3 8.4-4.3-8.4V47h-6.4z" />
+    </g>
+    <text x="70" y="35" font-family="Georgia, Times New Roman, serif" font-size="31"
+          font-style="italic" fill="#E9EDF5">Felipe Mendes</text>
+  </g>
+
+  <text x="1100" y="577" text-anchor="end" font-family="Segoe UI, Arial, sans-serif"
+        font-size="23" fill="#8D97AD">devfelipemendes.com.br</text>
+</svg>

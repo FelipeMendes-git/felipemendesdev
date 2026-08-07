@@ -1,0 +1,182 @@
+@import 'tailwindcss';
+
+/*
+  Tema escuro é o padrão. O claro é uma variante desenhada, não uma inversão.
+  A classe .light no <html> ativa o tema claro (ver script anti-flash no index.html).
+*/
+@custom-variant light (&:where(.light, .light *));
+
+/* ---------------------------------------------------------------
+   Tokens semânticos. Componentes sempre consomem estes, nunca os
+   valores brutos, para que a troca de tema funcione em um só lugar.
+   --------------------------------------------------------------- */
+:root {
+  color-scheme: dark;
+
+  --bg: #070a12;
+  --bg-2: #04060c;
+  --surface: #0c111c;
+  --surface-2: #111828;
+  --border: rgb(255 255 255 / 8.5%);
+  --hairline: rgb(255 255 255 / 5.5%);
+  --text: #e9edf5;
+  --text-dim: #c3cad9;
+  --muted: #8d97ad;
+  /* Contraste 4.67:1 sobre --bg: atende WCAG AA para texto normal. */
+  --faint: #727b90;
+  --accent: #4a7cff;
+  --accent-hi: #7fa3ff;
+  --accent-deep: #1b2e6b;
+  /* Tinta sobre o acento. Escura de propósito: branco sobre a safira
+     luminosa daria só 3.74:1, abaixo do mínimo WCAG AA. Assim são 5.07:1. */
+  --accent-ink: #071024;
+  --accent-soft: rgb(74 124 255 / 11%);
+  --accent-line: rgb(74 124 255 / 32%);
+  --glow: rgb(74 124 255 / 26%);
+  --glow-2: rgb(27 46 107 / 55%);
+  --sheen: linear-gradient(135deg, #ffffff 0%, #a9beef 52%, #5f82d8 100%);
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 50%), 0 10px 30px -16px rgb(0 0 0 / 80%);
+  --shadow-md: 0 2px 8px rgb(0 0 0 / 50%), 0 34px 70px -28px rgb(0 0 0 / 90%);
+  --shadow-xl: 0 8px 20px rgb(0 0 0 / 55%), 0 70px 130px -40px rgb(0 0 0 / 100%);
+}
+
+.light {
+  color-scheme: light;
+
+  --bg: #f1f3f8;
+  --bg-2: #e7eaf2;
+  --surface: #ffffff;
+  --surface-2: #f6f8fc;
+  --border: rgb(11 15 26 / 11%);
+  --hairline: rgb(11 15 26 / 7%);
+  --text: #0b0f1a;
+  --text-dim: #2c3446;
+  --muted: #5c6579;
+  /* Contraste 4.61:1 sobre --bg: atende WCAG AA para texto normal. */
+  --faint: #666e80;
+  --accent: #1d4ed8;
+  --accent-hi: #1e40af;
+  --accent-deep: #c9d6f5;
+  --accent-ink: #ffffff;
+  --accent-soft: rgb(29 78 216 / 8%);
+  --accent-line: rgb(29 78 216 / 28%);
+  --glow: rgb(29 78 216 / 20%);
+  --glow-2: rgb(29 78 216 / 10%);
+  --sheen: linear-gradient(135deg, #0b0f1a 0%, #23407f 55%, #1d4ed8 100%);
+
+  --shadow-sm: 0 1px 2px rgb(11 15 26 / 5%), 0 10px 28px -16px rgb(11 15 26 / 20%);
+  --shadow-md: 0 2px 8px rgb(11 15 26 / 6%), 0 30px 60px -26px rgb(11 15 26 / 28%);
+  --shadow-xl: 0 6px 18px rgb(11 15 26 / 8%), 0 60px 110px -40px rgb(11 15 26 / 34%);
+}
+
+/* ---------------------------------------------------------------
+   Mapeia os tokens para utilitários do Tailwind: bg-surface,
+   text-muted, border-hairline, shadow-xl, ease-out-soft, etc.
+   --------------------------------------------------------------- */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--border);
+  --color-hairline: var(--hairline);
+  --color-ink: var(--text);
+  --color-ink-dim: var(--text-dim);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-hi: var(--accent-hi);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-line: var(--accent-line);
+  --color-glow: var(--glow);
+
+  --font-sans: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+
+  --shadow-soft: var(--shadow-sm);
+  --shadow-lift: var(--shadow-md);
+  --shadow-deep: var(--shadow-xl);
+
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  --radius-panel: 28px;
+
+  --animate-shimmer: shimmer 3.6s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    55%,
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+/* ---------------------------------------------------------------
+   Base
+   --------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6.25rem;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: theme(--font-sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 600;
+    letter-spacing: -0.038em;
+    line-height: 1.06;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* Palavra de destaque: serifada em itálico sobre gradiente. */
+  .italic-accent {
+    font-family: theme(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    background: var(--sheen);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /* Micro-label em caixa alta: o código tipográfico de "alto padrão". */
+  .eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+}

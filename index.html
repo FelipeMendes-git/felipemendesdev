@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tema escuro é o padrão; aplicado antes do paint para não piscar. -->
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem('tema') === 'claro') {
+          document.documentElement.classList.add('light');
+        }
+      } catch (e) {
+        /* localStorage bloqueado: mantém o tema escuro padrão */
+      }
+    })();
+  </script>
+
+  <title>Landing Pages que Convertem | Felipe Mendes</title>
+  <meta name="description"
+    content="Criação de landing pages sob medida para empresas que investem em divulgação. Alto padrão visual, carregamento imediato e mais contatos. Uberaba, MG." />
+  <meta name="author" content="Felipe Dias Mendes" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <link rel="canonical" href="https://devfelipemendes.com.br/" />
+
+  <meta name="theme-color" content="#070a12" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f1f3f8" media="(prefers-color-scheme: light)" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Felipe Mendes" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://devfelipemendes.com.br/" />
+  <meta property="og:title" content="Landing Pages que Convertem | Felipe Mendes" />
+  <meta property="og:description"
+    content="Criação de landing pages sob medida para empresas que investem em divulgação. Alto padrão visual, carregamento imediato e mais contatos." />
+  <meta property="og:image" content="https://devfelipemendes.com.br/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Felipe Mendes — criação de landing pages de alto padrão" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Landing Pages que Convertem | Felipe Mendes" />
+  <meta name="twitter:description"
+    content="Criação de landing pages sob medida para empresas que investem em divulgação. Alto padrão visual, carregamento imediato e mais contatos." />
+  <meta name="twitter:image" content="https://devfelipemendes.com.br/og-image.png" />
+
+  <!-- Dados estruturados: o serviço prestado -->
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "@id": "https://devfelipemendes.com.br/#servico",
+        "name": "Felipe Mendes | Criação de Landing Pages",
+        "description": "Criação de landing pages sob medida para empresas que investem em divulgação e precisam converter visitantes em contatos.",
+        "url": "https://devfelipemendes.com.br/",
+        "telephone": "+5534991969192",
+        "priceRange": "$$",
+        "image": "https://devfelipemendes.com.br/og-image.png",
+        "areaServed": { "@type": "Country", "name": "Brasil" },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Uberaba",
+          "addressRegion": "MG",
+          "addressCountry": "BR"
+        },
+        "founder": {
+          "@type": "Person",
+          "name": "Felipe Dias Mendes",
+          "jobTitle": "Desenvolvedor Web",
+          "sameAs": ["https://br.linkedin.com/in/felipe-dias-mendes-"]
+        },
+        "sameAs": ["https://br.linkedin.com/in/felipe-dias-mendes-"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Serviços",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Landing page sob medida",
+                "description": "Página única desenhada para converter, com domínio configurado, certificado de segurança, preparo para o Google e 30 dias de ajustes."
+              }
+            }
+          ]
+        }
+      }
+    </script>
+
+  <!-- Dados estruturados: perguntas frequentes (elegível a rich result) -->
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Qual o investimento?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Depende da extensão da página e de quanto conteúdo precisa ser criado do zero. No diagnóstico eu entendo o escopo e apresento um valor fechado, sem custo adicional depois."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Preciso entender de tecnologia?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Não. Você me conta sobre o seu negócio em linguagem comum. Domínio, hospedagem, segurança e publicação são responsabilidade minha, do início ao fim."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Em quanto tempo fica pronta?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Em geral até 7 dias a partir da aprovação do desenho. O prazo exato é combinado antes de começar e eu o cumpro."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Consigo alterar o conteúdo depois?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sim. Textos, imagens e valores ficam sob seu controle, e eu deixo uma orientação gravada de como alterar. Nos primeiros 30 dias, qualquer ajuste é por minha conta."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Existe mensalidade?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Da minha parte, não. Seguem apenas os custos que qualquer página no ar tem: o domínio (o endereço do site) e a hospedagem. O domínio é adquirido por você e fica registrado no seu nome, e eu acompanho a compra do começo ao fim."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "E se eu não aprovar o resultado?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Você vê a proposta visual completa antes de eu programar. Refinamos nessa etapa quantas vezes for necessário. Nada é publicado sem a sua aprovação."
+            }
+          }
+        ]
+      }
+    </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>

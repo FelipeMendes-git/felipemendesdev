@@ -10,7 +10,7 @@ import Container from '../ui/Container';
  * conforme a página rola.
  */
 const FICHAS = [
-  { rotulo: 'Hoje', texto: 'Desenvolvedor full-stack na Uniube, em Uberaba (MG).' },
+  { rotulo: 'Hoje', texto: 'Desenvolvedor full-stack na minha empresa atual, em Uberaba (MG).' },
   { rotulo: 'Formação', texto: 'Graduado em Análise e Desenvolvimento de Sistemas.' },
   { rotulo: 'No dia a dia', texto: 'IA para escrever código e IA integrada aos sistemas.' },
   { rotulo: 'Como trabalho', texto: 'Spec-driven development: a especificação vem antes do código.' },
@@ -152,7 +152,7 @@ export default function Sobre() {
           ref={bio}
           className="titulo max-w-[22ch] text-[clamp(1.9rem,4.6vw,4.4rem)] leading-[1.06] tracking-[-0.03em] lg:max-w-[26ch]"
         >
-          Na Uniube, já entreguei sozinho sistemas completos: da modelagem do banco à tela que a pessoa
+          Na minha empresa atual, já entreguei sozinho sistemas completos: da modelagem do banco à tela que a pessoa
           usa. Uso IA todos os dias, para programar melhor e como parte do que entrego.
         </p>
       </Container>

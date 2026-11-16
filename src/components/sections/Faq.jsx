@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { useRef, useState } from 'react';
 import { Plus } from 'lucide-react';
-import Reveal from '../motion/Reveal';
-import { Container, Section, SectionHeading } from '../ui/Section';
+import { gsap, useGSAP, MOTION, revealLines } from '../../lib/gsap';
+import { CONTACT } from '../../lib/site';
+import { cn } from '../../lib/cn';
+import Container from '../ui/Container';
 
 /** As mesmas perguntas estão no JSON-LD do index.html (FAQPage). Manter em sincronia. */
 const QUESTIONS = [
@@ -32,85 +33,108 @@ const QUESTIONS = [
   },
 ];
 
-function Item({ question, answer, isOpen, onToggle, panelId, buttonId }) {
-  const reduced = useReducedMotion();
+function Item({ question, answer, open, onToggle, index }) {
+  const buttonId = `duvida-botao-${index}`;
+  const panelId = `duvida-painel-${index}`;
 
   return (
-    <div className="border-b border-hairline">
-      <h3 className="m-0">
+    <div className="border-b border-current/20">
+      <h3 className="m-0 text-[clamp(1.25rem,1.9vw,1.6rem)] font-semibold leading-[1.2] tracking-[-0.015em]">
         <button
           type="button"
           id={buttonId}
-          aria-expanded={isOpen}
+          aria-expanded={open}
           aria-controls={panelId}
           onClick={onToggle}
-          className="flex w-full items-center justify-between gap-5 bg-transparent px-1 py-[1.5625rem] text-left text-[1.02rem] font-medium text-ink transition-colors duration-300 ease-smooth hover:text-accent-hi"
+          className="group flex w-full items-center justify-between gap-6 py-6 text-left"
         >
           {question}
-          <motion.span
+          <span
             aria-hidden="true"
-            animate={{ rotate: isOpen ? 135 : 0 }}
-            transition={reduced ? { duration: 0 } : { duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="flex shrink-0 text-accent"
+            className={cn(
+              'grid size-10 shrink-0 place-items-center rounded-full border border-current/25 transition-[rotate,background-color,border-color,color] duration-500 ease-out-expo motion-reduce:transition-none',
+              'group-hover:border-current/60',
+              open && 'rotate-45 border-brasa bg-brasa text-noite',
+            )}
           >
-            <Plus size={17} strokeWidth={2} />
-          </motion.span>
+            <Plus size={18} strokeWidth={1.8} />
+          </span>
         </button>
       </h3>
 
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            id={panelId}
-            role="region"
-            aria-labelledby={buttonId}
-            initial={reduced ? false : { height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={reduced ? undefined : { height: 0, opacity: 0 }}
-            transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden"
-          >
-            <p className="m-0 pb-[1.6875rem] pl-1 pr-[3.75rem] text-[1rem] text-muted">{answer}</p>
-          </motion.div>
+      {/* Altura animada com grid 0fr → 1fr: funciona em todo navegador, sem medir nada. */}
+      <div
+        id={panelId}
+        role="region"
+        aria-labelledby={buttonId}
+        inert={!open}
+        className={cn(
+          'grid transition-[grid-template-rows] duration-500 ease-out-expo motion-reduce:transition-none',
+          open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
         )}
-      </AnimatePresence>
+      >
+        <div className="overflow-hidden">
+          <p className="max-w-[40rem] pb-7 pr-14 leading-[1.6] text-fg-muted">{answer}</p>
+        </div>
+      </div>
     </div>
   );
 }
 
 export default function Faq() {
+  const root = useRef(null);
   const [openIndex, setOpenIndex] = useState(null);
 
-  return (
-    <Section id="duvidas" labelledBy="duvidas-titulo">
-      <Container>
-        <Reveal>
-          <SectionHeading
-            id="duvidas-titulo"
-            eyebrow="Dúvidas"
-            title={
-              <>
-                O que costumam <span className="italic-accent">me perguntar.</span>
-              </>
-            }
-          />
-        </Reveal>
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add(MOTION, () => revealLines(gsap.utils.selector(root)('[data-reveal]')));
+      return () => mm.revert();
+    },
+    { scope: root },
+  );
 
-        <div className="mx-auto max-w-[48.75rem] border-t border-hairline">
+  return (
+    <section
+      ref={root}
+      id="duvidas"
+      data-tone="osso"
+      aria-labelledby="duvidas-titulo"
+      className="py-[clamp(5rem,12vw,10rem)]"
+    >
+      <Container className="grid gap-x-12 gap-y-12 lg:grid-cols-12">
+        <div className="self-start lg:sticky lg:top-[calc(var(--header-h)+3rem)] lg:col-span-5">
+          <h2 id="duvidas-titulo" data-reveal className="titulo text-[clamp(2.9rem,6.4vw,6.25rem)]">
+            Dúvidas <em className="block">de sempre.</em>
+          </h2>
+          <p className="mt-7 max-w-[24rem] text-[clamp(1.05rem,1.3vw,1.2rem)] text-fg-muted">
+            Não achou a sua?{' '}
+            <a
+              href={CONTACT.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-fg underline decoration-current/35 decoration-1 underline-offset-[6px] transition-[text-decoration-color] duration-300 hover:decoration-current"
+            >
+              Pergunte no WhatsApp
+              <span className="sr-only"> (abre em nova aba)</span>
+            </a>
+            .
+          </p>
+        </div>
+
+        <div className="border-t border-current/20 lg:col-span-7">
           {QUESTIONS.map((item, index) => (
-            <Reveal key={item.q} delay={(index % 3) * 0.06}>
-              <Item
-                question={item.q}
-                answer={item.a}
-                isOpen={openIndex === index}
-                onToggle={() => setOpenIndex(openIndex === index ? null : index)}
-                buttonId={`faq-botao-${index}`}
-                panelId={`faq-painel-${index}`}
-              />
-            </Reveal>
+            <Item
+              key={item.q}
+              index={index}
+              question={item.q}
+              answer={item.a}
+              open={openIndex === index}
+              onToggle={() => setOpenIndex(openIndex === index ? null : index)}
+            />
           ))}
         </div>
       </Container>
-    </Section>
+    </section>
   );
 }

@@ -1,182 +1,323 @@
 @import 'tailwindcss';
 
-/*
-  Tema escuro é o padrão. O claro é uma variante desenhada, não uma inversão.
-  A classe .light no <html> ativa o tema claro (ver script anti-flash no index.html).
-*/
-@custom-variant light (&:where(.light, .light *));
+/* =====================================================================
+   Paleta "noite e brasa"
 
-/* ---------------------------------------------------------------
-   Tokens semânticos. Componentes sempre consomem estes, nunca os
-   valores brutos, para que a troca de tema funcione em um só lugar.
-   --------------------------------------------------------------- */
+   A página é escura na maior parte: verde quase preto, texto cor de osso
+   e um laranja vivo para o que precisa saltar (palavras em destaque,
+   rabiscos e botões). As seções claras são respiros, não a base.
+   ===================================================================== */
 :root {
-  color-scheme: dark;
+  --noite: #0c1612; /* fundo escuro */
+  --mata: #15281f; /* superfícies sobre o escuro */
+  --osso: #f1ebe0; /* fundo claro e texto sobre o escuro */
+  --papel: #faf6ee; /* cartões e janelas claras */
+  --areia: #e3dac9; /* blocos de apoio no claro */
+  --brasa: #ff5c1a; /* destaque: 6:1 sobre a noite, e a noite tem 6:1 sobre ele */
+  --brasa-funda: #b83d0a; /* o mesmo destaque como texto sobre o claro: 4.8:1 */
+  --cinza: #5b5d53; /* texto secundário no claro: 5.7:1 */
+  --nevoa: #a7ada0; /* texto secundário no escuro: 8:1 */
 
-  --bg: #070a12;
-  --bg-2: #04060c;
-  --surface: #0c111c;
-  --surface-2: #111828;
-  --border: rgb(255 255 255 / 8.5%);
-  --hairline: rgb(255 255 255 / 5.5%);
-  --text: #e9edf5;
-  --text-dim: #c3cad9;
-  --muted: #8d97ad;
-  /* Contraste 4.67:1 sobre --bg: atende WCAG AA para texto normal. */
-  --faint: #727b90;
-  --accent: #4a7cff;
-  --accent-hi: #7fa3ff;
-  --accent-deep: #1b2e6b;
-  /* Tinta sobre o acento. Escura de propósito: branco sobre a safira
-     luminosa daria só 3.74:1, abaixo do mínimo WCAG AA. Assim são 5.07:1. */
-  --accent-ink: #071024;
-  --accent-soft: rgb(74 124 255 / 11%);
-  --accent-line: rgb(74 124 255 / 32%);
-  --glow: rgb(74 124 255 / 26%);
-  --glow-2: rgb(27 46 107 / 55%);
-  --sheen: linear-gradient(135deg, #ffffff 0%, #a9beef 52%, #5f82d8 100%);
-
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 50%), 0 10px 30px -16px rgb(0 0 0 / 80%);
-  --shadow-md: 0 2px 8px rgb(0 0 0 / 50%), 0 34px 70px -28px rgb(0 0 0 / 90%);
-  --shadow-xl: 0 8px 20px rgb(0 0 0 / 55%), 0 70px 130px -40px rgb(0 0 0 / 100%);
+  --header-h: 4.5rem;
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
 }
 
-.light {
-  color-scheme: light;
+/* ---------------------------------------------------------------------
+   Tom da página
 
-  --bg: #f1f3f8;
-  --bg-2: #e7eaf2;
-  --surface: #ffffff;
-  --surface-2: #f6f8fc;
-  --border: rgb(11 15 26 / 11%);
-  --hairline: rgb(11 15 26 / 7%);
-  --text: #0b0f1a;
-  --text-dim: #2c3446;
-  --muted: #5c6579;
-  /* Contraste 4.61:1 sobre --bg: atende WCAG AA para texto normal. */
-  --faint: #666e80;
-  --accent: #1d4ed8;
-  --accent-hi: #1e40af;
-  --accent-deep: #c9d6f5;
-  --accent-ink: #ffffff;
-  --accent-soft: rgb(29 78 216 / 8%);
-  --accent-line: rgb(29 78 216 / 28%);
-  --glow: rgb(29 78 216 / 20%);
-  --glow-2: rgb(29 78 216 / 10%);
-  --sheen: linear-gradient(135deg, #0b0f1a 0%, #23407f 55%, #1d4ed8 100%);
-
-  --shadow-sm: 0 1px 2px rgb(11 15 26 / 5%), 0 10px 28px -16px rgb(11 15 26 / 20%);
-  --shadow-md: 0 2px 8px rgb(11 15 26 / 6%), 0 30px 60px -26px rgb(11 15 26 / 28%);
-  --shadow-xl: 0 6px 18px rgb(11 15 26 / 8%), 0 60px 110px -40px rgb(11 15 26 / 34%);
+   --bg, --fg, --fg-muted e --accent são registradas como cores para que o
+   navegador saiba interpolá-las: quando uma seção clara entra, o
+   JavaScript troca data-tone no <html> e a página inteira muda de cor numa
+   transição contínua, em vez de blocos empilhados.
+   --------------------------------------------------------------------- */
+@property --bg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #0c1612;
 }
 
-/* ---------------------------------------------------------------
-   Mapeia os tokens para utilitários do Tailwind: bg-surface,
-   text-muted, border-hairline, shadow-xl, ease-out-soft, etc.
-   --------------------------------------------------------------- */
-@theme inline {
-  --color-bg: var(--bg);
-  --color-bg-2: var(--bg-2);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-line: var(--border);
-  --color-hairline: var(--hairline);
-  --color-ink: var(--text);
-  --color-ink-dim: var(--text-dim);
-  --color-muted: var(--muted);
-  --color-faint: var(--faint);
-  --color-accent: var(--accent);
-  --color-accent-hi: var(--accent-hi);
-  --color-accent-deep: var(--accent-deep);
-  --color-accent-ink: var(--accent-ink);
-  --color-accent-soft: var(--accent-soft);
-  --color-accent-line: var(--accent-line);
-  --color-glow: var(--glow);
+@property --fg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #f1ebe0;
+}
 
-  --font-sans: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
-  --font-serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+@property --fg-muted {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #a7ada0;
+}
 
-  --shadow-soft: var(--shadow-sm);
-  --shadow-lift: var(--shadow-md);
-  --shadow-deep: var(--shadow-xl);
+@property --accent {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ff5c1a;
+}
 
-  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-smooth: cubic-bezier(0.22, 0.61, 0.36, 1);
+html {
+  --bg: var(--noite);
+  --fg: var(--osso);
+  --fg-muted: var(--nevoa);
+  --accent: var(--brasa);
+}
 
-  --radius-panel: 28px;
+html[data-tone='osso'] {
+  --bg: var(--osso);
+  --fg: var(--noite);
+  --fg-muted: var(--cinza);
+  --accent: var(--brasa-funda);
+}
 
-  --animate-shimmer: shimmer 3.6s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
-
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%);
-    }
-    55%,
-    100% {
-      transform: translateX(100%);
-    }
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    transition:
+      --bg 0.8s cubic-bezier(0.65, 0, 0.35, 1),
+      --fg 0.8s cubic-bezier(0.65, 0, 0.35, 1),
+      --fg-muted 0.8s cubic-bezier(0.65, 0, 0.35, 1),
+      --accent 0.8s cubic-bezier(0.65, 0, 0.35, 1);
   }
 }
 
-/* ---------------------------------------------------------------
+/* Sem animação, cada seção pinta o próprio fundo e nada muda de cor sozinho. */
+@media (prefers-reduced-motion: reduce) {
+  [data-tone] {
+    background-color: var(--bg);
+    color: var(--fg);
+  }
+
+  [data-tone='noite'] {
+    --bg: var(--noite);
+    --fg: var(--osso);
+    --fg-muted: var(--nevoa);
+    --accent: var(--brasa);
+  }
+
+  [data-tone='osso'] {
+    --bg: var(--osso);
+    --fg: var(--noite);
+    --fg-muted: var(--cinza);
+    --accent: var(--brasa-funda);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Tokens para o Tailwind: bg-noite, text-fg, text-fg-muted, text-accent...
+   --------------------------------------------------------------------- */
+@theme inline {
+  --color-noite: var(--noite);
+  --color-mata: var(--mata);
+  --color-osso: var(--osso);
+  --color-papel: var(--papel);
+  --color-areia: var(--areia);
+  --color-brasa: var(--brasa);
+  --color-brasa-funda: var(--brasa-funda);
+  --color-cinza: var(--cinza);
+  --color-nevoa: var(--nevoa);
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-accent: var(--accent);
+
+  --font-sans: 'Jost Variable', 'Jost', 'Century Gothic', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Bodoni Moda Variable', 'Bodoni Moda', 'Bodoni MT', Didot, Georgia, serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------------------------------------------------------------------
    Base
-   --------------------------------------------------------------- */
+   --------------------------------------------------------------------- */
 @layer base {
   html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 6.25rem;
+    background-color: var(--bg);
+    color: var(--fg);
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
+    min-height: 100svh;
     background-color: var(--bg);
-    color: var(--text);
-    font-family: theme(--font-sans);
-    line-height: 1.65;
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    overflow-x: hidden;
+    /* clip, não hidden: hidden cria um contêiner de rolagem e quebra o sticky. */
+    overflow-x: clip;
   }
 
   h1,
   h2,
   h3 {
-    font-weight: 600;
-    letter-spacing: -0.038em;
-    line-height: 1.06;
-    text-wrap: balance;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--brasa);
+    color: var(--noite);
   }
 
   :focus-visible {
-    outline: 1px solid var(--accent);
-    outline-offset: 4px;
-    border-radius: 2px;
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
+  /* Destinos de âncora recebem foco por script; não são controles, sem contorno. */
+  [tabindex='-1']:focus {
+    outline: none;
   }
 }
 
+/* ---------------------------------------------------------------------
+   Peças reutilizáveis
+   --------------------------------------------------------------------- */
 @layer components {
-  /* Palavra de destaque: serifada em itálico sobre gradiente. */
-  .italic-accent {
-    font-family: theme(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    background: var(--sheen);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
+  /*
+    Título de vitrine: Jost pesada em caixa alta, com as palavras de
+    destaque (<em>) em Bodoni itálica na cor de destaque. É o par que dá a
+    voz da página: uma letra grita, a outra assina.
+  */
+  .titulo {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.9;
+    text-transform: uppercase;
   }
 
-  /* Micro-label em caixa alta: o código tipográfico de "alto padrão". */
-  .eyebrow {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+  .titulo em,
+  .serif {
+    font-family: var(--font-display);
+    /* Tamanho óptico fixo: no automático os traços finos somem em telas comuns. */
+    font-variation-settings: 'opsz' var(--opsz, 26);
+    font-weight: 440;
+  }
+
+  .titulo em {
+    color: var(--accent);
+    font-size: 1.06em;
+    font-style: italic;
+    letter-spacing: -0.03em;
+    text-transform: none;
+  }
+
+  /* Balão de mensagem, usado só onde o desenho mostra uma conversa. */
+  .bubble {
+    border-radius: 1.4em 1.4em 1.4em 0.3em;
+  }
+
+  /* Rabiscos de marcador: traço grosso, pontas redondas. */
+  .rabisco {
+    overflow: visible;
+    fill: none;
+    stroke: var(--accent);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+  }
+
+  /* -------------------------------------------------------------------
+     Celular desenhado em CSS. A tela é um contêiner: tudo dentro dela
+     usa cqw e escala junto com o aparelho.
+     ------------------------------------------------------------------- */
+  .phone {
+    position: relative;
+    aspect-ratio: 9 / 19.5;
+    border-radius: 15% / 6.9%;
+    background: #060c09;
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 14%),
+      0 2px 6px rgb(0 0 0 / 30%),
+      0 44px 90px -34px rgb(0 0 0 / 70%);
+  }
+
+  .phone-screen {
+    position: absolute;
+    inset: 1.55% 3.4%;
+    overflow: hidden;
+    border-radius: 12% / 5.4%;
+    container-type: inline-size;
+  }
+
+  .phone-island {
+    position: absolute;
+    top: 3cqw;
+    left: 50%;
+    z-index: 5;
+    width: 29cqw;
+    height: 8.4cqw;
+    translate: -50% 0;
+    border-radius: 99px;
+    background: #000;
+  }
+
+  /*
+    Aparelho do topo: só a moldura, com a tela vazada. Quem pinta a tela é
+    o canvas que fica por baixo (a mancha líquida); a imagem dentro dela é
+    a reserva para quando o WebGL não está disponível.
+  */
+  .aparelho {
+    --w: clamp(14rem, 25vw, 22.5rem);
+    position: relative;
+    width: var(--w);
+    aspect-ratio: 9 / 19;
+    border: calc(var(--w) * 0.03) solid #060c09;
+    border-radius: calc(var(--w) * 0.15);
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 16%),
+      inset 0 0 0 1px rgb(255 255 255 / 10%),
+      0 50px 100px -30px rgb(0 0 0 / 75%);
+  }
+
+  .aparelho-tela {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: calc(var(--w) * 0.12);
+  }
+
+  /* Máscara das linhas do SplitText: folga para acentos, descendentes
+     (ç, g, p, j) e a inclinação do itálico não serem cortados. */
+  .split-line-mask {
+    margin: -0.18em -0.08em;
+    padding: 0.18em 0.08em;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Cenas com rolagem. Com movimento permitido, os passos da anatomia
+   ficam empilhados no mesmo lugar e o GSAP troca um pelo outro. Sem
+   movimento, eles voltam a ser uma lista comum, um abaixo do outro.
+   --------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) and (min-width: 64rem) {
+  /* No desktop todos os títulos ficam visíveis e só a descrição troca. */
+  .anatomy-list {
+    position: relative;
+    padding-bottom: 6.5rem;
+  }
+
+  .anatomy-desc {
+    position: absolute;
+    inset: auto 0 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (max-width: 63.999rem) {
+  /* No celular um passo por vez ocupa o mesmo espaço. */
+  .anatomy-list {
+    display: grid;
+  }
+
+  .anatomy-list > li {
+    grid-area: 1 / 1;
   }
 }

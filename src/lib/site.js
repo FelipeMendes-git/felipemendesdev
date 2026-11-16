@@ -9,7 +9,6 @@
 export const SITE = {
   url: 'https://devfelipemendes.com.br',
   name: 'Felipe Mendes',
-  role: 'Landing Pages',
   owner: 'Felipe Dias Mendes',
   city: 'Uberaba',
   state: 'MG',
@@ -24,11 +23,3 @@ export const CONTACT = {
   )}`,
   linkedin: 'https://br.linkedin.com/in/felipe-dias-mendes-',
 };
-
-export const NAV_LINKS = [
-  { href: '#porque', label: 'Por que' },
-  { href: '#anatomia', label: 'Anatomia' },
-  { href: '#processo', label: 'Processo' },
-  { href: '#incluido', label: 'Incluído' },
-  { href: '#duvidas', label: 'Dúvidas' },
-];

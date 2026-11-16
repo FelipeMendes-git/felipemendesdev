@@ -1,67 +1,38 @@
 import { useEffect, useState } from 'react';
-import Button from '../ui/Button';
-import ThemeToggle from '../ui/ThemeToggle';
-import Magnetic from '../motion/Magnetic';
-import { Container } from '../ui/Section';
-import { CONTACT, NAV_LINKS, SITE } from '../../lib/site';
+import WhatsAppButton from '../ui/WhatsAppButton';
 import { cn } from '../../lib/cn';
 
-export function Wordmark() {
-  return (
-    <a href="#topo" className="inline-flex items-baseline gap-2.5 text-[1.04rem] font-semibold">
-      {/* Usa a classe do index.css: o recorte do gradiente no texto precisa
-          de -webkit-background-clip, que não sobrevive como classe arbitrária. */}
-      <span className="italic-accent text-[1.24rem]">{SITE.name}</span>
-      {/* Abaixo de sm o descritor sai: não cabe ao lado do botão de ação. */}
-      <span aria-hidden="true" className="hidden h-[15px] w-px self-center bg-line sm:block" />
-      <span className="eyebrow hidden text-faint sm:inline">{SITE.role}</span>
-    </a>
-  );
-}
-
+/**
+ * Sem menu, de propósito: a página defende que landing page não tem atalhos,
+ * então ela mesma não tem. Só o nome e o caminho até a conversa.
+ */
 export default function Header() {
-  const [stuck, setStuck] = useState(false);
+  const [scrolled, setScrolled] = useState(() => window.scrollY > 8);
 
   useEffect(() => {
-    const onScroll = () => setStuck(window.scrollY > 14);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 border-b border-transparent',
-        'transition-[background-color,border-color] duration-400 ease-smooth',
-        stuck && 'border-b-hairline bg-[color-mix(in_srgb,var(--bg)_82%,transparent)] backdrop-blur-lg',
+        'fixed inset-x-0 top-0 z-50 border-b border-transparent transition-[background-color,border-color,backdrop-filter] duration-500',
+        scrolled && 'border-fg/10 bg-[color-mix(in_srgb,var(--bg)_86%,transparent)] backdrop-blur-md',
       )}
     >
-      <Container className="flex h-[4.875rem] items-center justify-between gap-4">
-        <Wordmark />
+      <div className="mx-auto flex h-[var(--header-h)] w-full max-w-[96rem] items-center justify-between gap-4 px-[var(--gutter)]">
+        {/* O nome usa as duas vozes da página: a que grita e a que assina. */}
+        <a href="#topo" aria-label="Felipe Mendes, voltar ao topo" className="titulo text-[1.2rem] leading-none [--opsz:12] sm:text-[1.3rem] [&_em]:font-semibold">
+          Felipe <em>Mendes</em>
+        </a>
 
-        <nav aria-label="Navegação principal" className="hidden gap-1 lg:flex">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="rounded-full px-[0.9375rem] py-2.5 text-[0.875rem] text-muted transition-colors duration-300 ease-smooth hover:text-ink"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-2.5">
-          <ThemeToggle />
-          <Magnetic>
-            <Button href={CONTACT.whatsapp} size="sm">
-              <span className="sm:hidden">Proposta</span>
-              <span className="hidden sm:inline">Solicitar proposta</span>
-            </Button>
-          </Magnetic>
-        </div>
-      </Container>
+        <WhatsAppButton size="sm">
+          <span className="sm:hidden">WhatsApp</span>
+          <span className="max-sm:hidden">Falar no WhatsApp</span>
+        </WhatsAppButton>
+      </div>
     </header>
   );
 }

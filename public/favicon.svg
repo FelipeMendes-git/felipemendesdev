@@ -1,22 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Felipe Mendes">
   <title>Felipe Mendes</title>
-  <defs>
-    <linearGradient id="fm-safira" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#5C8AFF" />
-      <stop offset="1" stop-color="#2450D8" />
-    </linearGradient>
-  </defs>
 
-  <rect width="64" height="64" rx="15" fill="url(#fm-safira)" />
+  <rect width="64" height="64" rx="14" fill="#ff5c1a" />
 
   <!--
-    Monograma "FM" desenhado como caminho geométrico em vez de <text>:
-    fontes não são confiáveis em favicons e as formas continuam nítidas a 16px.
+    Monograma "FM" com os contornos da Jost pesada (a fonte dos títulos do site),
+    convertidos em caminhos: favicons não carregam fontes.
   -->
-  <g fill="#FFFFFF">
-    <!-- F -->
-    <path d="M14 17h16v6.4H20.6v5.1h8.2v6.4h-8.2V47H14z" />
-    <!-- M -->
-    <path d="M33.5 17h5.9l4.8 9.6 4.8-9.6h5.9v30h-6.4V30.2l-4.3 8.4-4.3-8.4V47h-6.4z" />
+  <g fill="#0c1612" transform="translate(5.75 45.00) scale(0.03537)">
+    <path d="M204 -535H517V-700H204ZM204 -263H507V-416H204ZM72 -700V0H258V-700Z" />
+    <path d="M806 -322 986 -65 1167 -322 1206 0H1412L1291 -735L986 -332L682 -735L561 0H767Z" />
   </g>
 </svg>

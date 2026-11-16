@@ -101,11 +101,14 @@ export default function Hero() {
       <canvas ref={canvas} aria-hidden="true" className="pointer-events-none absolute inset-0 size-full" />
 
       <Container className="relative z-10 grid min-h-svh items-center gap-x-8 gap-y-14 pb-[clamp(3rem,8vh,6rem)] pt-[calc(var(--header-h)+clamp(1.5rem,5vh,4rem))] lg:grid-cols-12">
-        <div className="lg:col-span-8">
+        {/* @container: o título se mede pela coluna (cqi), não pela janela. Com vw, a
+            fonte seguia crescendo depois que o Container trava em 96rem e
+            "Desenvolvedor" (~7em) passava da coluna em telas largas. */}
+        <div className="@container lg:col-span-8">
           <h1
             id="hero-titulo"
             aria-label="Desenvolvedor full-stack e IA aplicada."
-            className="titulo text-[clamp(2.7rem,11.6vw,6.5rem)] lg:text-[clamp(4rem,min(8vw,17.5vh),9.75rem)]"
+            className="titulo text-[min(13.4cqi,6.5rem)] lg:text-[clamp(4rem,min(13.4cqi,17.5vh),9.75rem)]"
           >
             <Linha marca="data-linha-1">Desenvolvedor</Linha>
             <Linha marca="data-linha-2">full-stack</Linha>

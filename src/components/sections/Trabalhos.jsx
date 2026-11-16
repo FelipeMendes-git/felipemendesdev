@@ -190,7 +190,8 @@ const PROJETOS = [
     Arte: ArteLegado,
   },
   {
-    titulo: 'Botchquim',
+    titulo: 'Botechquim',
+    link: { href: 'https://www.instagram.com/botechquim/', rotulo: '@botechquim no Instagram' },
     papel: 'projeto particular',
     texto:
       'Página no Instagram com vídeos gerados automaticamente. Quem produz é uma skill para o Claude que eu mesmo desenvolvi.',
@@ -353,7 +354,7 @@ export default function Trabalhos() {
             ref={track}
             className="flex flex-col gap-14 px-[max(var(--gutter),calc((100vw-96rem)/2+var(--gutter)))] motion-safe:w-max motion-safe:flex-row motion-safe:gap-0 motion-safe:will-change-transform"
           >
-            {PROJETOS.map(({ titulo, papel, texto, Arte }) => (
+            {PROJETOS.map(({ titulo, papel, texto, link, Arte }) => (
               <li
                 key={titulo}
                 data-painel
@@ -367,6 +368,17 @@ export default function Trabalhos() {
                   {titulo}
                 </h3>
                 <p className="mt-3 max-w-[27rem] text-fg-muted">{texto}</p>
+                {link && (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 w-max font-medium underline decoration-accent decoration-2 underline-offset-[7px] transition-[text-decoration-color] duration-300 hover:decoration-current"
+                  >
+                    {link.rotulo}
+                    <span className="sr-only"> (abre em nova aba)</span>
+                  </a>
+                )}
               </li>
             ))}
           </ul>

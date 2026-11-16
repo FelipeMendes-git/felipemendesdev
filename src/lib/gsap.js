@@ -6,9 +6,10 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
+import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import { useGSAP } from '@gsap/react';
 
-gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, useGSAP);
+gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, ScrambleTextPlugin, useGSAP);
 
 // A barra de endereço do celular encolhe e cresce durante a rolagem. Sem isto,
 // cada mudança recalcularia todas as cenas fixadas e a tela daria saltos.

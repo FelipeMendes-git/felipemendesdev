@@ -1,0 +1,280 @@
+<!doctype html>
+<!--
+  As duas telas do aparelho do topo (src/assets/topo/), 376x786 em 2x.
+  ?v=interface  a tela que a pessoa usa
+  ?v=codigo     o código por trás dela, que a mancha líquida revela
+  Gere com: npm i -D puppeteer-core && node design/gerar-topo.mjs && npm un puppeteer-core
+
+  A tela é um exemplo inventado na identidade do site: não reproduz nenhum
+  sistema real.
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      @font-face {
+        font-family: 'Bricolage Grotesque';
+        src: url('../node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2')
+          format('woff2-variations');
+        font-weight: 200 800;
+      }
+
+      @font-face {
+        font-family: 'Schibsted Grotesk';
+        src: url('../node_modules/@fontsource-variable/schibsted-grotesk/files/schibsted-grotesk-latin-wght-normal.woff2')
+          format('woff2-variations');
+        font-weight: 400 900;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      body {
+        width: 376px;
+        height: 786px;
+        overflow: hidden;
+        font-family: 'Schibsted Grotesk', sans-serif;
+      }
+
+      .tela {
+        display: none;
+        height: 100%;
+        padding: 58px 22px 0;
+      }
+
+      body[data-v='interface'] .interface,
+      body[data-v='codigo'] .codigo {
+        display: block;
+      }
+
+      /* ---------- a interface ---------- */
+      .interface {
+        background: #f1f2f7;
+        color: #131a4a;
+      }
+
+      .topo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .topo b {
+        font-family: 'Bricolage Grotesque', sans-serif;
+        font-size: 19px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      .avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #131a4a;
+      }
+
+      h1 {
+        margin-top: 30px;
+        font-family: 'Bricolage Grotesque', sans-serif;
+        font-size: 38px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 0.96;
+      }
+
+      h1 span {
+        display: inline-block;
+        margin-top: 4px;
+        padding: 0 6px 3px;
+        border-radius: 3px 6px 4px 5px;
+        background: #ffd43b;
+      }
+
+      .cartao {
+        margin-top: 22px;
+        padding: 18px;
+        border-radius: 20px;
+        background: #fff;
+        box-shadow: 0 18px 40px -24px rgb(19 26 74 / 45%);
+      }
+
+      .cartao small {
+        color: #4a5070;
+        font-size: 13px;
+      }
+
+      .cartao strong {
+        display: block;
+        margin-top: 2px;
+        font-family: 'Bricolage Grotesque', sans-serif;
+        font-size: 44px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+
+      .barras {
+        display: flex;
+        align-items: flex-end;
+        gap: 9px;
+        height: 118px;
+        margin-top: 18px;
+      }
+
+      .barras i {
+        flex: 1;
+        border-radius: 7px 7px 0 0;
+        background: #dde1ee;
+      }
+
+      .barras i.sim {
+        background: #2a3fd0;
+      }
+
+      .escuro {
+        background: #131a4a;
+        color: #f1f2f7;
+      }
+
+      .escuro small {
+        color: #aab3e6;
+      }
+
+      .escuro p {
+        margin-top: 8px;
+        font-size: 15px;
+        line-height: 1.4;
+      }
+
+      .linhas {
+        display: grid;
+        gap: 9px;
+        margin-top: 14px;
+      }
+
+      .linhas i {
+        height: 8px;
+        border-radius: 9px;
+        background: rgb(241 242 247 / 22%);
+      }
+
+      .botao {
+        margin-top: 22px;
+        padding: 17px;
+        border-radius: 99px;
+        background: #ffd43b;
+        font-size: 16px;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      /* ---------- o código ---------- */
+      .codigo {
+        background: #0b1033;
+        color: #c9d0f5;
+        font-family: 'Cascadia Code', Consolas, 'Courier New', monospace;
+        font-size: 12.5px;
+        line-height: 1.75;
+      }
+
+      .arquivo {
+        display: inline-block;
+        margin-bottom: 18px;
+        padding: 5px 12px;
+        border-radius: 8px;
+        background: #1e2870;
+        color: #f1f2f7;
+        font-size: 12px;
+      }
+
+      pre {
+        font: inherit;
+        white-space: pre;
+      }
+
+      .n {
+        color: #5b66a8;
+      }
+
+      .k {
+        color: #ffd43b;
+      }
+
+      .f {
+        color: #8fa2ff;
+      }
+
+      .s {
+        color: #9fe6c3;
+      }
+
+      .c {
+        color: #6c77b8;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="tela interface">
+      <div class="topo"><b>painel</b><span class="avatar"></span></div>
+      <h1>Como foi <span>a semana</span></h1>
+
+      <div class="cartao">
+        <small>Avaliações recebidas</small>
+        <strong>1.284</strong>
+        <div class="barras">
+          <i style="height: 42%"></i><i style="height: 58%"></i><i style="height: 49%"></i
+          ><i style="height: 71%"></i><i class="sim" style="height: 100%"></i><i style="height: 64%"></i
+          ><i style="height: 80%"></i>
+        </div>
+      </div>
+
+      <div class="cartao escuro">
+        <small>Relatório gerado por IA</small>
+        <p>O atendimento melhorou em relação à semana passada. O ponto de atenção é o tempo de espera.</p>
+        <div class="linhas"><i style="width: 92%"></i><i style="width: 74%"></i></div>
+      </div>
+
+      <div class="botao">Ver relatório completo</div>
+    </section>
+
+    <section class="tela codigo">
+      <span class="arquivo">relatorio-semanal.ts</span>
+<pre><span class="n"> 1</span>  <span class="c">// toda segunda, às 7h</span>
+<span class="n"> 2</span>  <span class="k">export async function</span> <span class="f">relatorioSemanal</span>() {
+<span class="n"> 3</span>    <span class="k">const</span> semana = <span class="f">ultimaSemana</span>();
+<span class="n"> 4</span>
+<span class="n"> 5</span>    <span class="k">const</span> respostas = <span class="k">await</span> db
+<span class="n"> 6</span>      .<span class="f">from</span>(<span class="s">'avaliacoes'</span>)
+<span class="n"> 7</span>      .<span class="f">where</span>(<span class="s">'criada_em'</span>, <span class="s">'>='</span>, semana.inicio)
+<span class="n"> 8</span>      .<span class="f">groupBy</span>(<span class="s">'area'</span>);
+<span class="n"> 9</span>
+<span class="n">10</span>    <span class="k">const</span> resumo = <span class="k">await</span> ia.<span class="f">resumir</span>({
+<span class="n">11</span>      dados: respostas,
+<span class="n">12</span>      tom: <span class="s">'direto, para gestores'</span>,
+<span class="n">13</span>    });
+<span class="n">14</span>
+<span class="n">15</span>    <span class="k">await</span> painel.<span class="f">publicar</span>(semana, resumo);
+<span class="n">16</span>    <span class="k">await</span> <span class="f">avisarGestores</span>(resumo);
+<span class="n">17</span>  }
+<span class="n">18</span>
+<span class="n">19</span>  <span class="c">// token de acesso: 10 min, 3 tentativas</span>
+<span class="n">20</span>  <span class="k">export function</span> <span class="f">validarToken</span>(t: Token) {
+<span class="n">21</span>    <span class="k">if</span> (t.tentativas >= <span class="s">3</span>) <span class="k">return</span> <span class="f">bloquear</span>(t);
+<span class="n">22</span>    <span class="k">if</span> (<span class="f">expirou</span>(t, <span class="s">'10min'</span>)) <span class="k">return</span> <span class="f">negar</span>(t);
+<span class="n">23</span>    <span class="k">return</span> <span class="f">liberar</span>(t);
+<span class="n">24</span>  }
+<span class="n">25</span>
+<span class="n">26</span>  <span class="k">export const</span> rotas = [
+<span class="n">27</span>    <span class="f">get</span>(<span class="s">'/painel'</span>, <span class="f">soGestores</span>, painel.ver),
+<span class="n">28</span>    <span class="f">post</span>(<span class="s">'/avaliar'</span>, <span class="f">recaptcha</span>, avaliar),
+<span class="n">29</span>    <span class="f">post</span>(<span class="s">'/token'</span>, <span class="f">limite</span>(<span class="s">'5/h'</span>), enviar),
+<span class="n">30</span>  ];</pre>
+    </section>
+
+    <script>
+      document.body.dataset.v = new URLSearchParams(location.search).get('v') ?? 'interface';
+    </script>
+  </body>
+</html>

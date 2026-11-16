@@ -8,16 +8,15 @@
     <meta charset="UTF-8" />
     <style>
       @font-face {
-        font-family: 'Jost';
-        src: url('../node_modules/@fontsource-variable/jost/files/jost-latin-wght-normal.woff2')
+        font-family: 'Bricolage Grotesque';
+        src: url('../node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2')
           format('woff2-variations');
-        font-weight: 100 900;
+        font-weight: 200 800;
       }
 
       @font-face {
-        font-family: 'Bodoni Moda';
-        font-style: italic;
-        src: url('../node_modules/@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-opsz-italic.woff2')
+        font-family: 'Schibsted Grotesk';
+        src: url('../node_modules/@fontsource-variable/schibsted-grotesk/files/schibsted-grotesk-latin-wght-normal.woff2')
           format('woff2-variations');
         font-weight: 400 900;
       }
@@ -31,9 +30,9 @@
         width: 1200px;
         height: 630px;
         overflow: hidden;
-        background: #0c1612;
-        color: #f1ebe0;
-        font-family: 'Jost', sans-serif;
+        background: #131a4a;
+        color: #f1f2f7;
+        font-family: 'Schibsted Grotesk', sans-serif;
       }
 
       .page {
@@ -52,60 +51,48 @@
       }
 
       h1 {
-        font-size: 150px;
+        font-family: 'Bricolage Grotesque', sans-serif;
+        font-size: 112px;
         font-weight: 800;
-        letter-spacing: -0.045em;
-        line-height: 0.88;
-        text-transform: uppercase;
+        letter-spacing: -0.04em;
+        line-height: 0.94;
       }
 
-      h1 em {
-        display: block;
-        margin-top: 6px;
-        color: #ff5c1a;
-        font-family: 'Bodoni Moda', serif;
-        font-variation-settings: 'opsz' 30;
-        font-size: 96px;
-        font-weight: 440;
-        letter-spacing: -0.03em;
-        line-height: 1.05;
-        text-transform: none;
+      h1 span {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 2px 12px 8px;
+        border-radius: 6px 12px 8px 10px;
+        background: #ffd43b;
+        color: #131a4a;
+        font-size: 64px;
       }
 
       .rodape {
         display: flex;
-        align-items: center;
+        align-items: baseline;
         gap: 22px;
         font-size: 26px;
       }
 
       .nome {
-        font-size: 30px;
+        font-family: 'Bricolage Grotesque', sans-serif;
+        font-size: 32px;
         font-weight: 800;
         letter-spacing: -0.04em;
-        text-transform: uppercase;
-      }
-
-      .nome em {
-        color: #ff5c1a;
-        font-family: 'Bodoni Moda', serif;
-        font-variation-settings: 'opsz' 14;
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        text-transform: none;
       }
 
       .dominio {
-        color: #a7ada0;
+        color: #aab3e6;
       }
 
       /* A mesma tela que abre o site, num aparelho que sai pela base. */
       .aparelho {
         align-self: end;
-        width: 300px;
+        width: 290px;
         height: 520px;
         overflow: hidden;
-        border: 9px solid #060c09;
+        border: 9px solid #080c26;
         border-bottom: 0;
         border-radius: 44px 44px 0 0;
         box-shadow: 0 0 0 1px rgb(255 255 255 / 16%);
@@ -120,13 +107,13 @@
   <body>
     <div class="page">
       <div class="texto">
-        <h1>Landing pages<em>que vendem.</em></h1>
+        <h1>Desenvolvedor<br />full-stack<br /><span>e IA aplicada.</span></h1>
         <p class="rodape">
-          <span class="nome">Felipe <em>Mendes</em></span>
+          <span class="nome">Felipe Mendes</span>
           <span class="dominio">devfelipemendes.com.br</span>
         </p>
       </div>
-      <div class="aparelho"><img src="../src/assets/topo/topo-pagina.webp" alt="" /></div>
+      <div class="aparelho"><img src="../src/assets/topo/topo-interface.webp" alt="" /></div>
     </div>
   </body>
 </html>

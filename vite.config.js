@@ -38,10 +38,10 @@ export default defineConfig({
     tailwindcss(),
     preloadTopo([
       // Só o recorte latino das fontes: é o que o português usa.
-      { padrao: /jost-latin-wght-normal-.+\.woff2$/, attrs: FONTE },
-      { padrao: /bodoni-moda-latin-opsz-italic-.+\.woff2$/, attrs: FONTE },
-      // A página que o aparelho do topo mostra antes de a mancha entrar.
-      { padrao: /topo-pagina-.+\.webp$/, attrs: { as: 'image', type: 'image/webp', fetchpriority: 'high' } },
+      { padrao: /bricolage-grotesque-latin-wght-normal-.+\.woff2$/, attrs: FONTE },
+      { padrao: /schibsted-grotesk-latin-wght-normal-.+\.woff2$/, attrs: FONTE },
+      // A tela que o aparelho do topo mostra antes de a mancha entrar.
+      { padrao: /topo-interface-.+\.webp$/, attrs: { as: 'image', type: 'image/webp', fetchpriority: 'high' } },
     ]),
   ],
   server: {

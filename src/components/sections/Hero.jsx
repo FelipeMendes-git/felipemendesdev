@@ -3,17 +3,19 @@ import { gsap, SplitText, useGSAP, MOTION, EASE_OUT } from '../../lib/gsap';
 import { ligarFluido } from '../../lib/fluido';
 import { INTRO, TEM_INTRO } from '../../lib/intro';
 import { TOPO } from '../../lib/topo';
+import { CONTACT } from '../../lib/site';
 import { cn } from '../../lib/cn';
-import WhatsAppButton from '../ui/WhatsAppButton';
+import Botao from '../ui/Botao';
+import { LinkedInIcon } from '../ui/BrandIcons';
 import Rabisco from '../ui/Rabisco';
 import Container from '../ui/Container';
 
 /** Linha do título: quem se move na rolagem é o invólucro; a máscara corta as letras que sobem. */
-function Linha({ children, marca, className }) {
+function Linha({ children, marca }) {
   return (
     <span {...{ [marca]: '' }} className="block will-change-transform">
       <span className="split-line-mask block overflow-clip">
-        <span data-hero-letras className={cn('block whitespace-nowrap', className)}>
+        <span data-hero-letras className="block whitespace-nowrap">
           {children}
         </span>
       </span>
@@ -62,7 +64,7 @@ export default function Hero() {
                 yPercent: 118,
                 rotation: 8,
                 duration: 1.15,
-                stagger: 0.03,
+                stagger: 0.025,
                 delay: espera,
                 ease: EASE_OUT,
               }),
@@ -72,6 +74,8 @@ export default function Hero() {
             .timeline({ delay: espera, defaults: { ease: EASE_OUT } })
             // Sem esmaecer: a imagem do aparelho é pintada desde o primeiro quadro (conta para o LCP).
             .from(q('[data-hero-aparelho]'), { y: 140, duration: 1.6 }, 0.15)
+            // A passada de marca-texto risca a terceira linha antes de as letras chegarem nela.
+            .from(q('[data-hero-marca]'), { scaleX: 0, duration: 0.85, ease: 'power3.inOut' }, 0.3)
             .from(q('[data-hero-some]'), { autoAlpha: 0, y: 22, duration: 1.1, stagger: 0.1 }, 0.6)
             .from(q('[data-rabisco] path'), { drawSVG: 0, duration: 0.7, stagger: 0.2, ease: 'power2.inOut' }, 1.5);
 
@@ -79,9 +83,9 @@ export default function Hero() {
           // aparelho sobe um pouco mais rápido. Só translação: nada de
           // perspectiva nem escala, que distorcem e engasgam.
           const saida = { trigger: root.current, start: 'top top', end: 'bottom top', scrub: true };
-          gsap.to(q('[data-linha-1]'), { xPercent: -9, ease: 'none', scrollTrigger: saida });
-          gsap.to(q('[data-linha-2]'), { xPercent: 12, ease: 'none', scrollTrigger: saida });
-          gsap.to(q('[data-linha-3]'), { xPercent: -5, ease: 'none', scrollTrigger: saida });
+          gsap.to(q('[data-linha-1]'), { xPercent: -7, ease: 'none', scrollTrigger: saida });
+          gsap.to(q('[data-linha-2]'), { xPercent: 10, ease: 'none', scrollTrigger: saida });
+          gsap.to(q('[data-linha-3]'), { xPercent: -4, ease: 'none', scrollTrigger: saida });
           gsap.to(q('[data-hero-paralaxe]'), { yPercent: -12, ease: 'none', scrollTrigger: saida });
         },
         root,
@@ -93,41 +97,54 @@ export default function Hero() {
   );
 
   return (
-    <section ref={root} data-tone="noite" aria-labelledby="hero-titulo" className="relative overflow-clip">
+    <section ref={root} data-tone="tinta" aria-labelledby="hero-titulo" className="relative overflow-clip">
       <canvas ref={canvas} aria-hidden="true" className="pointer-events-none absolute inset-0 size-full" />
 
       <Container className="relative z-10 grid min-h-svh items-center gap-x-8 gap-y-14 pb-[clamp(3rem,8vh,6rem)] pt-[calc(var(--header-h)+clamp(1.5rem,5vh,4rem))] lg:grid-cols-12">
         <div className="lg:col-span-8">
           <h1
             id="hero-titulo"
-            aria-label="Landing pages que vendem."
-            className="titulo text-[clamp(4.2rem,min(14.2vw,22.5vh),15rem)]"
+            aria-label="Desenvolvedor full-stack e IA aplicada."
+            className="titulo text-[clamp(2.7rem,11.6vw,6.5rem)] lg:text-[clamp(4rem,min(8vw,17.5vh),9.75rem)]"
           >
-            <Linha marca="data-linha-1">Landing</Linha>
-            <Linha marca="data-linha-2">pages</Linha>
-            <span data-linha-3 className="block will-change-transform">
-              <span className="split-line-mask block overflow-clip">
-                <em data-hero-letras className="block whitespace-nowrap text-[0.6em] leading-[1.05]">
-                  que vendem.
-                </em>
+            <Linha marca="data-linha-1">Desenvolvedor</Linha>
+            <Linha marca="data-linha-2">full-stack</Linha>
+            <span data-linha-3 className="mt-[0.16em] block will-change-transform">
+              <span className="relative inline-block px-[0.16em] pb-[0.06em] text-[0.56em] leading-[1.15] text-tinta">
+                <span
+                  data-hero-marca
+                  className="absolute inset-0 origin-left rounded-[0.08em_0.16em_0.1em_0.14em] bg-marca"
+                />
+                <span className="split-line-mask relative block overflow-clip">
+                  <span data-hero-letras className="block whitespace-nowrap">
+                    e IA aplicada.
+                  </span>
+                </span>
               </span>
             </span>
           </h1>
 
           <p
             data-hero-some
-            className="mt-[clamp(1.5rem,3vh,2.25rem)] max-w-[31rem] text-[clamp(1.1rem,1.5vw,1.3rem)] leading-[1.5] text-fg-muted"
+            className="mt-[clamp(1.5rem,3vh,2.25rem)] max-w-[34rem] text-[clamp(1.1rem,1.5vw,1.3rem)] leading-[1.5] text-fg-muted"
           >
-            Páginas sob medida para quem investe em anúncio e não pode perder visitante.
+            Sou Felipe Mendes. Construo sistemas web de ponta a ponta, do banco de dados à interface, e
+            uso IA tanto para desenvolver quanto dentro dos produtos.
           </p>
 
           <div data-hero-some className="mt-[clamp(1.5rem,3.5vh,2.5rem)] flex flex-wrap items-center gap-x-9 gap-y-5">
-            <WhatsAppButton size="lg" />
+            <Botao href="#projetos" size="lg">
+              Ver projetos
+            </Botao>
             <a
-              href="#vitrine"
-              className="font-medium underline decoration-current/35 decoration-1 underline-offset-[7px] transition-[text-decoration-color] duration-300 hover:decoration-current"
+              href={CONTACT.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 font-medium underline decoration-current/35 decoration-1 underline-offset-[7px] transition-[text-decoration-color] duration-300 hover:decoration-current"
             >
-              Ver exemplos
+              <LinkedInIcon size={17} />
+              LinkedIn
+              <span className="sr-only"> (abre em nova aba)</span>
             </a>
           </div>
         </div>
@@ -139,8 +156,8 @@ export default function Hero() {
                 <img
                   src={TOPO.frente}
                   alt=""
-                  width="624"
-                  height="1350"
+                  width="752"
+                  height="1572"
                   fetchPriority="high"
                   className={cn(
                     'size-full object-cover object-top transition-opacity duration-500',
@@ -156,14 +173,13 @@ export default function Hero() {
               data-hero-some
               className="absolute -left-[64%] top-[47%] hidden w-[50%] -rotate-6 motion-safe:lg:pointer-fine:block"
             >
-              <p className="serif text-[clamp(1.2rem,1.7vw,1.6rem)] italic leading-tight text-accent">passe o mouse</p>
+              <p className="mao text-[clamp(1.5rem,2.1vw,2rem)] text-accent">passe o mouse</p>
               <Rabisco forma="seta" className="ml-[22%] mt-2 w-[70%]" />
             </div>
 
             <p className="sr-only">
-              Ilustração: um celular mostra uma landing page com o título “Seu negócio, em uma página”. A
-              mancha que acompanha o cursor revela, por baixo, a planta dela: a promessa, a chamada, a
-              prova e as respostas.
+              Ilustração: um celular mostra um painel com as avaliações da semana e um relatório gerado
+              por IA. A mancha que acompanha o cursor revela, por baixo, o código que faz a tela funcionar.
             </p>
           </div>
         </div>

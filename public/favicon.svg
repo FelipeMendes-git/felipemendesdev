@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Felipe Mendes">
   <title>Felipe Mendes</title>
 
-  <rect width="64" height="64" rx="14" fill="#ff5c1a" />
+  <rect width="64" height="64" rx="14" fill="#ffd43b" />
 
   <!--
-    Monograma "FM" com os contornos da Jost pesada (a fonte dos títulos do site),
-    convertidos em caminhos: favicons não carregam fontes.
+    Monograma "FM" em contornos convertidos em caminhos: favicons não
+    carregam fontes.
   -->
-  <g fill="#0c1612" transform="translate(5.75 45.00) scale(0.03537)">
+  <g fill="#131a4a" transform="translate(5.75 45.00) scale(0.03537)">
     <path d="M204 -535H517V-700H204ZM204 -263H507V-416H204ZM72 -700V0H258V-700Z" />
     <path d="M806 -322 986 -65 1167 -322 1206 0H1412L1291 -735L986 -332L682 -735L561 0H767Z" />
   </g>

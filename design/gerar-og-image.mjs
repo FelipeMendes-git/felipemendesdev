@@ -1,7 +1,7 @@
 /**
  * Fotografa design/og-image.html em public/og-image.png (1200x630).
  *
- * O HTML usa as mesmas fontes do site (Jost e Bodoni Moda), então quem desenha a imagem é
+ * O HTML usa as mesmas fontes do site (Bricolage Grotesque e Schibsted Grotesk), então quem desenha a imagem é
  * um Chrome de verdade. A ferramenta não fica instalada: rode
  *   npm i -D puppeteer-core && node design/gerar-og-image.mjs && npm un puppeteer-core
  *

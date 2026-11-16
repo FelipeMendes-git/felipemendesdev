@@ -1,10 +1,11 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-// Jost (texto e títulos em caixa alta) e Bodoni Moda itálica (as palavras de
-// destaque). As duas são servidas pelo próprio site; o vite.config.js
-// pré-carrega as do topo. A Bodoni romana não é usada, então não é importada.
-import '@fontsource-variable/jost/wght.css';
-import '@fontsource-variable/bodoni-moda/opsz-italic.css';
+// Bricolage Grotesque (títulos), Schibsted Grotesk (texto) e Caveat (as
+// anotações à mão). As três são servidas pelo próprio site; o vite.config.js
+// pré-carrega as do topo.
+import '@fontsource-variable/bricolage-grotesque/wght.css';
+import '@fontsource-variable/schibsted-grotesk/wght.css';
+import '@fontsource-variable/caveat/wght.css';
 import 'lenis/dist/lenis.css';
 import './index.css';
 import App from './App.jsx';

@@ -40,17 +40,15 @@ export default function Intro() {
 
   return (
     <div ref={root} aria-hidden="true" className="fixed inset-0 z-[90]">
-      <div data-cortina className="absolute inset-0 bg-brasa" />
-      <div data-cortina className="absolute inset-0 flex flex-col justify-between bg-osso p-[var(--gutter)] text-noite">
-        <p className="titulo text-[1.2rem] leading-none [--accent:var(--brasa-funda)] [--opsz:12] sm:text-[1.3rem] [&_em]:font-semibold">
-          Felipe <em>Mendes</em>
-        </p>
+      <div data-cortina className="absolute inset-0 bg-marca" />
+      <div data-cortina className="absolute inset-0 flex flex-col justify-between bg-papel p-[var(--gutter)] text-tinta">
+        <p className="titulo text-[1.3rem] leading-none sm:text-[1.45rem]">Felipe Mendes</p>
         <div>
-          <p className="serif text-[clamp(7rem,24vw,20rem)] italic leading-[0.78] tracking-[-0.05em] [--opsz:30]">
+          <p className="titulo text-[clamp(7rem,24vw,20rem)] leading-[0.78] tabular-nums">
             <span data-numero>00</span>
           </p>
-          <div className="mt-[clamp(1rem,2.5vw,2rem)] h-[3px] bg-noite/15">
-            <div data-barra className="h-full origin-left bg-noite" />
+          <div className="mt-[clamp(1rem,2.5vw,2rem)] h-[3px] bg-tinta/15">
+            <div data-barra className="h-full origin-left bg-tinta" />
           </div>
         </div>
       </div>

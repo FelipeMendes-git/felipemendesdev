@@ -1,22 +1,22 @@
 @import 'tailwindcss';
 
 /* =====================================================================
-   Paleta "noite e brasa"
+   Paleta "tinta e papel"
 
-   A página é escura na maior parte: verde quase preto, texto cor de osso
-   e um laranja vivo para o que precisa saltar (palavras em destaque,
-   rabiscos e botões). As seções claras são respiros, não a base.
+   Azul de tinta de caneta no escuro, papel frio no claro. O destaque muda
+   de instrumento conforme o fundo: marca-texto amarelo sobre a tinta,
+   caneta azul sobre o papel. Os rabiscos seguem a mesma regra.
    ===================================================================== */
 :root {
-  --noite: #0c1612; /* fundo escuro */
-  --mata: #15281f; /* superfícies sobre o escuro */
-  --osso: #f1ebe0; /* fundo claro e texto sobre o escuro */
-  --papel: #faf6ee; /* cartões e janelas claras */
-  --areia: #e3dac9; /* blocos de apoio no claro */
-  --brasa: #ff5c1a; /* destaque: 6:1 sobre a noite, e a noite tem 6:1 sobre ele */
-  --brasa-funda: #b83d0a; /* o mesmo destaque como texto sobre o claro: 4.8:1 */
-  --cinza: #5b5d53; /* texto secundário no claro: 5.7:1 */
-  --nevoa: #a7ada0; /* texto secundário no escuro: 8:1 */
+  --tinta: #131a4a; /* fundo escuro */
+  --tinta-clara: #1e2870; /* superfícies sobre o escuro */
+  --papel: #f1f2f7; /* fundo claro e texto sobre o escuro */
+  --folha: #ffffff; /* cartões e janelas claras */
+  --pauta: #dde1ee; /* blocos de apoio e fios no claro */
+  --marca: #ffd43b; /* marca-texto: 11:1 sobre a tinta */
+  --caneta: #2a3fd0; /* destaque como texto sobre o papel: 6.9:1 */
+  --grafite: #4a5070; /* texto secundário no claro: 7:1 */
+  --bruma: #aab3e6; /* texto secundário no escuro: 8:1 */
 
   --header-h: 4.5rem;
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
@@ -33,39 +33,39 @@
 @property --bg {
   syntax: '<color>';
   inherits: true;
-  initial-value: #0c1612;
+  initial-value: #131a4a;
 }
 
 @property --fg {
   syntax: '<color>';
   inherits: true;
-  initial-value: #f1ebe0;
+  initial-value: #f1f2f7;
 }
 
 @property --fg-muted {
   syntax: '<color>';
   inherits: true;
-  initial-value: #a7ada0;
+  initial-value: #aab3e6;
 }
 
 @property --accent {
   syntax: '<color>';
   inherits: true;
-  initial-value: #ff5c1a;
+  initial-value: #ffd43b;
 }
 
 html {
-  --bg: var(--noite);
-  --fg: var(--osso);
-  --fg-muted: var(--nevoa);
-  --accent: var(--brasa);
+  --bg: var(--tinta);
+  --fg: var(--papel);
+  --fg-muted: var(--bruma);
+  --accent: var(--marca);
 }
 
-html[data-tone='osso'] {
-  --bg: var(--osso);
-  --fg: var(--noite);
-  --fg-muted: var(--cinza);
-  --accent: var(--brasa-funda);
+html[data-tone='papel'] {
+  --bg: var(--papel);
+  --fg: var(--tinta);
+  --fg-muted: var(--grafite);
+  --accent: var(--caneta);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -85,41 +85,42 @@ html[data-tone='osso'] {
     color: var(--fg);
   }
 
-  [data-tone='noite'] {
-    --bg: var(--noite);
-    --fg: var(--osso);
-    --fg-muted: var(--nevoa);
-    --accent: var(--brasa);
+  [data-tone='tinta'] {
+    --bg: var(--tinta);
+    --fg: var(--papel);
+    --fg-muted: var(--bruma);
+    --accent: var(--marca);
   }
 
-  [data-tone='osso'] {
-    --bg: var(--osso);
-    --fg: var(--noite);
-    --fg-muted: var(--cinza);
-    --accent: var(--brasa-funda);
+  [data-tone='papel'] {
+    --bg: var(--papel);
+    --fg: var(--tinta);
+    --fg-muted: var(--grafite);
+    --accent: var(--caneta);
   }
 }
 
 /* ---------------------------------------------------------------------
-   Tokens para o Tailwind: bg-noite, text-fg, text-fg-muted, text-accent...
+   Tokens para o Tailwind: bg-tinta, text-fg, text-fg-muted, text-accent...
    --------------------------------------------------------------------- */
 @theme inline {
-  --color-noite: var(--noite);
-  --color-mata: var(--mata);
-  --color-osso: var(--osso);
+  --color-tinta: var(--tinta);
+  --color-tinta-clara: var(--tinta-clara);
   --color-papel: var(--papel);
-  --color-areia: var(--areia);
-  --color-brasa: var(--brasa);
-  --color-brasa-funda: var(--brasa-funda);
-  --color-cinza: var(--cinza);
-  --color-nevoa: var(--nevoa);
+  --color-folha: var(--folha);
+  --color-pauta: var(--pauta);
+  --color-marca: var(--marca);
+  --color-caneta: var(--caneta);
+  --color-grafite: var(--grafite);
+  --color-bruma: var(--bruma);
   --color-bg: var(--bg);
   --color-fg: var(--fg);
   --color-fg-muted: var(--fg-muted);
   --color-accent: var(--accent);
 
-  --font-sans: 'Jost Variable', 'Jost', 'Century Gothic', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Bodoni Moda Variable', 'Bodoni Moda', 'Bodoni MT', Didot, Georgia, serif;
+  --font-sans: 'Schibsted Grotesk Variable', 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', 'Arial Narrow', ui-sans-serif, sans-serif;
+  --font-mao: 'Caveat Variable', 'Caveat', 'Segoe Print', cursive;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -140,7 +141,7 @@ html[data-tone='osso'] {
     background-color: var(--bg);
     color: var(--fg);
     font-family: var(--font-sans);
-    font-size: 1.125rem;
+    font-size: 1.0625rem;
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -161,8 +162,8 @@ html[data-tone='osso'] {
   }
 
   ::selection {
-    background: var(--brasa);
-    color: var(--noite);
+    background: var(--marca);
+    color: var(--tinta);
   }
 
   :focus-visible {
@@ -181,41 +182,35 @@ html[data-tone='osso'] {
    Peças reutilizáveis
    --------------------------------------------------------------------- */
 @layer components {
-  /*
-    Título de vitrine: Jost pesada em caixa alta, com as palavras de
-    destaque (<em>) em Bodoni itálica na cor de destaque. É o par que dá a
-    voz da página: uma letra grita, a outra assina.
-  */
+  /* Título: Bricolage pesada e apertada, em caixa normal. */
   .titulo {
-    font-family: var(--font-sans);
-    font-weight: 800;
-    letter-spacing: -0.045em;
-    line-height: 0.9;
-    text-transform: uppercase;
-  }
-
-  .titulo em,
-  .serif {
     font-family: var(--font-display);
-    /* Tamanho óptico fixo: no automático os traços finos somem em telas comuns. */
-    font-variation-settings: 'opsz' var(--opsz, 26);
-    font-weight: 440;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.94;
   }
 
-  .titulo em {
-    color: var(--accent);
-    font-size: 1.06em;
-    font-style: italic;
-    letter-spacing: -0.03em;
-    text-transform: none;
+  /*
+    Passada de marca-texto: o trecho fica sobre uma faixa amarela, com a
+    letra na cor da tinta. Vale igual no escuro e no claro.
+  */
+  .marca {
+    background: var(--marca);
+    color: var(--tinta);
+    border-radius: 0.08em 0.16em 0.1em 0.14em;
+    padding: 0.02em 0.14em 0.06em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
 
-  /* Balão de mensagem, usado só onde o desenho mostra uma conversa. */
-  .bubble {
-    border-radius: 1.4em 1.4em 1.4em 0.3em;
+  /* Anotação à mão, de quem revisa o trabalho com a caneta. */
+  .mao {
+    font-family: var(--font-mao);
+    font-weight: 600;
+    line-height: 1;
   }
 
-  /* Rabiscos de marcador: traço grosso, pontas redondas. */
+  /* Rabiscos: traço grosso, pontas redondas, na cor de destaque do tom. */
   .rabisco {
     overflow: visible;
     fill: none;
@@ -223,41 +218,6 @@ html[data-tone='osso'] {
     stroke-linecap: round;
     stroke-linejoin: round;
     pointer-events: none;
-  }
-
-  /* -------------------------------------------------------------------
-     Celular desenhado em CSS. A tela é um contêiner: tudo dentro dela
-     usa cqw e escala junto com o aparelho.
-     ------------------------------------------------------------------- */
-  .phone {
-    position: relative;
-    aspect-ratio: 9 / 19.5;
-    border-radius: 15% / 6.9%;
-    background: #060c09;
-    box-shadow:
-      inset 0 0 0 1px rgb(255 255 255 / 14%),
-      0 2px 6px rgb(0 0 0 / 30%),
-      0 44px 90px -34px rgb(0 0 0 / 70%);
-  }
-
-  .phone-screen {
-    position: absolute;
-    inset: 1.55% 3.4%;
-    overflow: hidden;
-    border-radius: 12% / 5.4%;
-    container-type: inline-size;
-  }
-
-  .phone-island {
-    position: absolute;
-    top: 3cqw;
-    left: 50%;
-    z-index: 5;
-    width: 29cqw;
-    height: 8.4cqw;
-    translate: -50% 0;
-    border-radius: 99px;
-    background: #000;
   }
 
   /*
@@ -270,12 +230,12 @@ html[data-tone='osso'] {
     position: relative;
     width: var(--w);
     aspect-ratio: 9 / 19;
-    border: calc(var(--w) * 0.03) solid #060c09;
+    border: calc(var(--w) * 0.03) solid #080c26;
     border-radius: calc(var(--w) * 0.15);
     box-shadow:
       0 0 0 1px rgb(255 255 255 / 16%),
       inset 0 0 0 1px rgb(255 255 255 / 10%),
-      0 50px 100px -30px rgb(0 0 0 / 75%);
+      0 50px 100px -30px rgb(3 6 30 / 80%);
   }
 
   .aparelho-tela {
@@ -285,39 +245,35 @@ html[data-tone='osso'] {
     border-radius: calc(var(--w) * 0.12);
   }
 
+  /* Janela de navegador em volta das capturas de tela. */
+  .janela {
+    overflow: hidden;
+    border-radius: clamp(0.7rem, 1.2vw, 1.1rem);
+    background: var(--folha);
+    box-shadow:
+      0 0 0 1px rgb(19 26 74 / 12%),
+      0 34px 70px -34px rgb(19 26 74 / 55%);
+  }
+
+  .janela-barra {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 0.85rem;
+    background: var(--pauta);
+  }
+
+  .janela-barra span {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 99px;
+    background: rgb(19 26 74 / 22%);
+  }
+
   /* Máscara das linhas do SplitText: folga para acentos, descendentes
-     (ç, g, p, j) e a inclinação do itálico não serem cortados. */
+     (ç, g, p, j) não serem cortados. */
   .split-line-mask {
     margin: -0.18em -0.08em;
     padding: 0.18em 0.08em;
-  }
-}
-
-/* ---------------------------------------------------------------------
-   Cenas com rolagem. Com movimento permitido, os passos da anatomia
-   ficam empilhados no mesmo lugar e o GSAP troca um pelo outro. Sem
-   movimento, eles voltam a ser uma lista comum, um abaixo do outro.
-   --------------------------------------------------------------------- */
-@media (prefers-reduced-motion: no-preference) and (min-width: 64rem) {
-  /* No desktop todos os títulos ficam visíveis e só a descrição troca. */
-  .anatomy-list {
-    position: relative;
-    padding-bottom: 6.5rem;
-  }
-
-  .anatomy-desc {
-    position: absolute;
-    inset: auto 0 0 0;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) and (max-width: 63.999rem) {
-  /* No celular um passo por vez ocupa o mesmo espaço. */
-  .anatomy-list {
-    display: grid;
-  }
-
-  .anatomy-list > li {
-    grid-area: 1 / 1;
   }
 }

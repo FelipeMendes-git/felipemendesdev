@@ -5,14 +5,10 @@ import Intro from './components/Intro';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Hero from './components/sections/Hero';
-import Manifesto from './components/sections/Manifesto';
-import Comparison from './components/sections/Comparison';
-import Vitrine from './components/sections/Vitrine';
-import Anatomy from './components/sections/Anatomy';
-import Numbers from './components/sections/Numbers';
-import Process from './components/sections/Process';
-import Included from './components/sections/Included';
-import Faq from './components/sections/Faq';
+import Sobre from './components/sections/Sobre';
+import Trabalhos from './components/sections/Trabalhos';
+import Educai from './components/sections/Educai';
+import Habilidades from './components/sections/Habilidades';
 import FinalCta from './components/sections/FinalCta';
 
 /** Liga a rolagem suave e trata links internos (#ancora) por ela. */
@@ -117,7 +113,7 @@ export default function App() {
     <>
       <a
         href="#conteudo"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-xl focus:bg-brasa focus:px-5 focus:py-3 focus:font-semibold focus:text-noite"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-xl focus:bg-marca focus:px-5 focus:py-3 focus:font-semibold focus:text-tinta"
       >
         Pular para o conteúdo
       </a>
@@ -128,14 +124,10 @@ export default function App() {
       <main id="conteudo" tabIndex={-1} className="outline-none">
         <div id="topo" />
         <Hero />
-        <Manifesto />
-        <Comparison />
-        <Vitrine />
-        <Anatomy />
-        <Numbers />
-        <Process />
-        <Included />
-        <Faq />
+        <Sobre />
+        <Trabalhos />
+        <Educai />
+        <Habilidades />
         <FinalCta />
       </main>
 

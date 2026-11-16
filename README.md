@@ -1,7 +1,8 @@
 # devfelipemendes.com.br
 
-Site de venda de landing pages do Felipe Mendes. Uma página só, escura e
-visual, com animações presas à rolagem e uma vitrine de páginas-conceito.
+Portfólio do Felipe Mendes, desenvolvedor full-stack. Uma página só, com
+animações presas à rolagem, feita para mostrar projetos, habilidades e o
+próprio domínio de GSAP.
 
 ```bash
 npm install
@@ -22,8 +23,9 @@ React deixava a página quebrada ou com texto antigo. CSS continua instantâneo.
 
 - **React 19 + Vite 8**, estilos com **Tailwind CSS 4**.
 - **GSAP 3.15** com **ScrollTrigger** (cenas presas à rolagem), **SplitText**
-  (títulos por linha e por letra) e **DrawSVG** (rabiscos). Todos os plugins
-  do GSAP são gratuitos, inclusive para uso comercial.
+  (títulos por linha, palavra e letra), **DrawSVG** (rabiscos) e
+  **ScrambleText** (o código que embaralha). Todos os plugins do GSAP são
+  gratuitos.
 - **@gsap/react** (`useGSAP`), que desfaz animações e gatilhos ao desmontar.
 - **Lenis** para a rolagem suave no desktop. No toque fica a rolagem nativa.
 - **WebGL puro** (sem biblioteca) para a mancha líquida do topo: `src/lib/fluido.js`.
@@ -32,49 +34,45 @@ React deixava a página quebrada ou com texto antigo. CSS continua instantâneo.
 
 ## Identidade
 
-Página escura na maior parte, com seções claras como respiro.
+"Tinta e papel": azul de tinta de caneta no escuro, papel frio no claro. O
+destaque muda de instrumento conforme o fundo.
 
-| Nome        | Cor       | Uso                                                  |
-| ----------- | --------- | ---------------------------------------------------- |
-| noite       | `#0c1612` | fundo escuro                                         |
-| mata        | `#15281f` | superfícies sobre o escuro                           |
-| osso        | `#f1ebe0` | fundo claro e texto sobre o escuro                   |
-| papel       | `#faf6ee` | cartões e janelas claras                             |
-| brasa       | `#ff5c1a` | destaque: palavras em itálico, rabiscos e botões     |
-| brasa-funda | `#b83d0a` | o mesmo destaque como texto sobre o claro (contraste) |
+| Nome        | Cor       | Uso                                             |
+| ----------- | --------- | ----------------------------------------------- |
+| tinta       | `#131a4a` | fundo escuro                                    |
+| tinta-clara | `#1e2870` | superfícies sobre o escuro                      |
+| papel       | `#f1f2f7` | fundo claro e texto sobre o escuro              |
+| folha       | `#ffffff` | cartões e janelas claras                        |
+| pauta       | `#dde1ee` | blocos de apoio no claro                        |
+| marca       | `#ffd43b` | marca-texto: destaque no escuro e botões        |
+| caneta      | `#2a3fd0` | destaque como texto e rabisco sobre o claro     |
 
-As cores vivem em `src/index.css` (`:root`).
+As cores vivem em `src/index.css` (`:root`). Trocar ali muda o site inteiro.
 
-- **Títulos (`.titulo`):** Jost pesada em caixa alta. As palavras dentro de
-  `<em>` saem em Bodoni Moda itálica na cor de destaque. É o par que dá a voz
-  da página.
-- **Rabiscos (`Rabisco.jsx`):** traços de marcador (círculo, onda, risco,
-  seta, visto) desenhados pelo GSAP.
-- **Botões:** pílulas na cor de destaque, levemente magnéticas no desktop.
-
-Não há menu de navegação, de propósito: a página defende que landing page não
-tem atalhos.
+- **Títulos (`.titulo`):** Bricolage Grotesque pesada e apertada.
+- **Texto:** Schibsted Grotesk.
+- **Anotações (`.mao`):** Caveat, a letra de quem revisa com a caneta.
+- **Marca-texto (`.marca`):** faixa amarela atrás de um trecho.
+- **Rabiscos (`Rabisco.jsx`):** traços (onda, seta, visto...) desenhados pelo GSAP.
+- **Botões (`Botao.jsx`):** pílulas, levemente magnéticas no desktop.
 
 ## Cenas
 
 Cada seção em `src/components/sections/` cuida da própria animação.
 
-| Seção        | O que acontece                                                                            |
-| ------------ | ----------------------------------------------------------------------------------------- |
-| `Intro`      | contador até 100 e duas cortinas que sobem (só para quem chega no começo da página)        |
-| `Hero`       | título letra a letra; no aparelho, uma mancha líquida segue o cursor e revela a planta da página |
-| `Manifesto`  | duas faixas de texto gigante correm em sentidos opostos e mensagens caem numa pilha        |
-| `Comparison` | site comum e landing page lado a lado: cursores se perdem no menu ou clicam no WhatsApp    |
-| `Vitrine`    | seis páginas-conceito; cada janela rola a própria página e as colunas andam em ritmos diferentes |
-| `Anatomy`    | uma landing é montada bloco a bloco no celular                                             |
-| `Numbers`    | o combinado em quatro números que contam e sobem                                           |
-| `Process`    | rolagem horizontal: do primeiro contato até a página no ar                                 |
-| `Included`   | seis cartões chegam empilhados e se abrem em leque                                         |
-| `Faq`        | acordeão acessível (sem biblioteca de animação)                                            |
-| `FinalCta`   | um painel escuro se abre até ocupar a tela                                                 |
+| Seção         | O que acontece                                                                                   |
+| ------------- | ------------------------------------------------------------------------------------------------ |
+| `Intro`       | contador até 100 e duas cortinas que sobem (só para quem chega no começo da página)               |
+| `Header`      | fio de progresso que acompanha a rolagem da página                                                |
+| `Hero`        | título letra a letra, passada de marca-texto e a mancha líquida que revela o código sob a tela    |
+| `Sobre`       | duas faixas gigantes em sentidos opostos, fichas caindo numa pilha e texto que acende por palavra |
+| `Trabalhos`   | rolagem horizontal; cada painel toca a própria cena (QR code, código embaralhado, avisos, vídeo)  |
+| `Educai`      | prévia do projeto: etiquetas que pulam e duas janelas que se abrem como persiana                  |
+| `Habilidades` | seis cartões chegam empilhados e se abrem em leque                                                |
+| `FinalCta`    | um painel escuro se abre até ocupar a tela e o título chega letra por letra                       |
 
 A cor de fundo da página inteira acompanha a seção do meio da tela: cada seção
-declara `data-tone` (`noite` ou `osso`) e o `App.jsx` troca o tom do `<html>`.
+declara `data-tone` (`tinta` ou `papel`) e o `App.jsx` troca o tom do `<html>`.
 A transição é feita pelo CSS com `@property`.
 
 O movimento usa só translação, rotação no plano, opacidade e máscaras. Nada de
@@ -87,49 +85,32 @@ mancha, nada preso à rolagem. Cada seção pinta o próprio fundo e as cenas
 mostram o estado final. O JavaScript usa `gsap.matchMedia()` e o CSS usa as
 mesmas media queries.
 
-## Aparelho do topo e páginas-conceito
-
-Duas regras, pedidas pelo Felipe:
-
-1. **O topo é a cara do site e não mostra conceito nenhum.** O aparelho exibe
-   uma página genérica na identidade do próprio site ("sua marca", "Seu
-   negócio, em uma página"), e a mancha revela a planta dela.
-2. **Nenhum conceito tem nome de empresa.** No lugar da marca vai "Sua
-   hamburgueria", "Seu estúdio" etc. Um nome inventado quase sempre já existe
-   em algum lugar, e a página pareceria trabalho feito para aquele negócio.
-
-Tudo isso existe como HTML em `design/conceitos/` e vira imagem com um comando:
-
-```bash
-npm i -D puppeteer-core && node design/gerar-conceitos.mjs && npm un puppeteer-core
-```
-
-- `topo.html` gera as duas telas do aparelho do topo (`src/assets/topo/`).
-- `pagina.html` gera as seis páginas da vitrine (`src/assets/conceitos/`).
-
-- Para mudar um conceito, edite os textos, as cores ou a foto em `pagina.html`
-  (objeto `CONCEITOS`) e gere de novo.
-- Para trocar um conceito por um trabalho real (com autorização do cliente),
-  coloque a captura de tela em `src/assets/conceitos/` e ajuste
-  `src/lib/conceitos.js`.
-- As fotos são do Unsplash (uso livre). Créditos em `design/conceitos/CREDITOS.md`.
-- As fontes extras usadas só nesses conceitos (Anton, Cormorant, Hanken
-  Grotesk) estão em `devDependencies` e não entram no site.
-
 ## Editar conteúdo
 
 - **Contato e domínio:** `src/lib/site.js`. O domínio também aparece no
   `index.html` (canonical, Open Graph e JSON-LD).
-- **Perguntas frequentes:** `src/components/sections/Faq.jsx` e o JSON-LD
-  `FAQPage` no `index.html`. Mantenha os dois iguais.
+- **Projetos:** lista `PROJETOS` em `sections/Trabalhos.jsx`. Cada um tem um
+  desenho no lugar das telas. Para um projeto novo, crie o desenho (`Arte...`)
+  e a cena dele em `CENAS`.
+- **EducAI (prévia, ainda não lançado):** `sections/Educai.jsx`, com as
+  capturas em `src/assets/educai/`.
+- **Habilidades:** lista no topo de `Habilidades.jsx`.
+- **Aparelho do topo:** as duas telas (a interface e o código por trás dela)
+  são um exemplo inventado, desenhado em `design/topo.html`. Para mudar,
+  edite o HTML e gere de novo:
+
+  ```bash
+  npm i -D puppeteer-core && node design/gerar-topo.mjs && npm un puppeteer-core
+  ```
+
 - **Imagem de compartilhamento:** edite `design/og-image.html` e gere de novo:
 
   ```bash
   npm i -D puppeteer-core && node design/gerar-og-image.mjs && npm un puppeteer-core
   ```
 
-- **Favicon:** `public/favicon.svg` é o monograma "FM" com os contornos da
-  Jost convertidos em caminhos (favicons não carregam fontes).
+- **Favicon:** `public/favicon.svg` é o monograma "FM" convertido em caminhos
+  (favicons não carregam fontes).
 
 ## Skills do Claude Code
 
